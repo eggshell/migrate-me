@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta charset="utf-8">
+        <meta content="width=device-width" name="viewport">
+        <meta charset="utf-8">
+        <title>Service Status</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="{{ url_for('static',
+                                     filename='styles.css') }}">
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="/">System Status</a>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div id="service-status">
+                <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+                <p>Waiting for database connection... <i class='em em-boat'></i></p>
+            </div>
+        </div>
+
+        <div class="container newservice main">
+            <div>
+                <h4>Add new service</h4>
+                Add a new service to the status tracker by filling in
+                it's name below. Something like <i>mailserver01</i>,
+                or <i>db04</i>.
+                <form id="service-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input autocomplete="off" id="service-add"
+                                   placeholder="service01" class="form-control"
+                                   type="text">
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" id="service-submit">Add</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container text-muted">
+                <div class="row">
+                    <div id="initial-pod" class="col-md-6">Initial
+                        Pod: {{ podname }}</div>
+                    <div id="last-pod" class="col-md-6">Last
+                        Pod</div>
+                </div>
+            </div>
+        </footer>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
+    </body>
+</html>
