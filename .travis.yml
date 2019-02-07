@@ -1,0 +1,17 @@
+language: python
+python:
+#  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+notifications:
+  email: false
+
+#install:
+#  - pip install tox virtualenv
+
+script:
+  - cd status_page
+  - make venv
+  - make run
+  - make test
