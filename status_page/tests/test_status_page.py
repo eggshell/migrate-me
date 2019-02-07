@@ -10,7 +10,7 @@ class Status_pageTestCase(unittest.TestCase):
 
     def test_index(self):
         rv = self.app.get('/')
-        self.assertIn('Welcome to status_page', rv.data.decode())
+        self.assertIn('Add new service', rv.data.decode())
 
 
 if __name__ == '__main__':

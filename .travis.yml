@@ -13,5 +13,5 @@ notifications:
 script:
   - cd status_page
   - make venv
-  - make run
+#  - make run
   - make test
