@@ -1,0 +1,6 @@
+test:
+  script:
+  - apt update -qq
+  - apt install -y build-essential python3-dev
+  - make venv
+  - make test

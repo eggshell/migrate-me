@@ -7,6 +7,5 @@ notifications:
   email: false
 
 script:
-  - cd status_page
   - make venv
   - make test
