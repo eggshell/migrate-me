@@ -1,6 +1,15 @@
 stages:
-  - build
   - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  script:
+  - apt update -qq
+  - apt install -y build-essential python3-dev virtualenv
+  - make venv
+  - make test
 
 build:
   stage: build
@@ -15,10 +24,25 @@ build:
   script:
     - docker build --tag eggshell/status_page:1 .
 
-test:
-  stage: test
+deploy:
+  stage: deploy
+  image: docker:dind
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  before_script:
+    - apk add curl
+    - curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
+    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    - chmod +x ./kubectl
+    - mv ./kubectl /usr/local/bin/kubectl
   script:
-  - apt update -qq
-  - apt install -y build-essential python3-dev virtualenv
-  - make venv
-  - make test
+    - sh scripts/deploy.sh
+
+#deploy:
+#  stage: deploy
+#  image: ibmcom/ibm-cloud-developer-tools-amd64
+#  script:
+#    - sh scripts/deploy.sh

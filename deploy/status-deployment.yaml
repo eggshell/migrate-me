@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: status-web
+  namespace: status-page
   labels:
     app: status-web
 spec:
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
       - name: status-web
-        image: registry.ng.bluemix.net/status_page/web:1
+        image: registry.ng.bluemix.net/eggshell/status_page:1
         imagePullPolicy: Always
         env:
           - name: REDIS_HOST
@@ -29,11 +30,16 @@ spec:
           httpGet:
             path: /readiness
             port: 5000
+      imagePullSecrets:
+        - name: bluemix-default-secret
+        - name: bluemix-default-secret-regional
+        - name: bluemix-default-secret-international
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: status-web
+  namespace: status-page
   labels:
     app: status-web
 spec:

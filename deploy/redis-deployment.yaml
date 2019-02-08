@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-leader
+  namespace: status-page
   labels:
     app: redis
     role: leader
@@ -28,6 +29,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis-leader
+  namespace: status-page
   labels:
     app: redis
     role: leader
@@ -43,6 +45,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-follower
+  namespace: status-page
   labels:
     app: redis
     role: follower
@@ -70,6 +73,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis-follower
+  namespace: status-page
   labels:
     app: redis
     role: follower
