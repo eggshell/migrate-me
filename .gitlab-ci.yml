@@ -1,4 +1,22 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  image: docker:dind
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  before_script:
+    - docker info
+  script:
+    - docker build --tag eggshell/status_page:1 .
+
 test:
+  stage: test
   script:
   - apt update -qq
   - apt install -y build-essential python3-dev virtualenv
