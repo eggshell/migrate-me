@@ -16,7 +16,7 @@ ibmcloud cr login
 ibmcloud cr region-set us-south
 
 while [ -z "${KUBECONFIG}" ]; do
-  $(ibmcloud ks cluster-config --export eggshell-gl-12)
+  $(ibmcloud ks cluster-config --export ${CLUSTER_NAME})
 done
 
 kubectl version
